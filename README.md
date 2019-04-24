@@ -1,14 +1,9 @@
-Buildroot
+TimOS
 =====
-[![Donate](https://img.shields.io/badge/Donate-PayPal-green.svg)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=55UJZHTXW8VTE)
+
 
 ## About
-The Metrological buildroot is designed to configure, patch and build a WPEWebKit and all its required dependencies for embedded devices. It can be used as a development platform, for example using the Raspberry Pi 2 (or zero/1), or as a reference platform for integration with additional software components.
-
-The Metrological buildroot includes the WPE package which is hosted here:
-https://github.com/WebPlatformForEmbedded/WPEWebKit
-
-The Metrological buildroot and Metrological WebKitForWayland forks contain changes, patches, new functionality that Metrological and partners added to comply to the latest MediaSource, Encrypted Media Extensions changes and new HTML5.x functionality specifically targeted for embedded devices. 
+TimOS is base on Buildroot with Webkit modules. It is available for raspberry pi 3B plus,
 
 ## Getting started
 
@@ -16,18 +11,28 @@ The Metrological buildroot and Metrological WebKitForWayland forks contain chang
 
 Clone this repository:
 ```
-git clone https://github.com/WebPlatformForEmbedded/buildroot.git
+https://github.com/timleunghk/buildroot-webkit.git
 ```
+### Preparations
+
+1. Ubuntu 16.04
+2. Update to latest components
+```
+sudo apt-get update 
+
+2. Install the following components
+
+```
+sudo apt-get install -y git subversion bc zip build-essential bison flex gettext libncurses5-dev texinfo autoconf automake libtool libpng12-dev libglib2.0-dev libgtk2.0-dev gperf libxt-dev ccache mtools
+
 
 ### Configuration
 
 Select a configuration for your embedded device from the `configs/` directory. For example for the Raspberry Pi 2 device:
 ```
-make raspberrypi2_wpe_defconfig
+make timrpi3_defconfig
 ```
-Buildroot provides you a menuconfig option for the first time. Select additional packages if you require or exit and save the config.
 
-**Note** that the `_ml` (Metrological) configurations such as `raspberrypi2_wpe_ml_defconfig` should be considered for internal Metrological use only. Unless you have access to the private repositories required, the build will fail.
 
 ### Build
 To build:
@@ -36,6 +41,8 @@ make
 ```
 
 Once completed the buildroot provides you with an `output/images` directory that contains the kernel image, root filesystem and optionally firmware packages (if RPI is used) to run the complete linux environment and the WPE browser.
+
+The filename of the image should be sdcard.img. You can copy it from `output/images` directory to other folders and write it into SD Card by using Ecther.
 
 For more information on buildroot way of working please see their documentation: https://buildroot.org/downloads/manual/manual.html
 
@@ -56,9 +63,7 @@ http://<ip of your target machine>:9998/
 
 WPE is verified and being tested by Metrological on the following devices:
 
- - Raspberry Pi zero, 1, 2 and 3
- - Broadcom chipsets (7430/7435) MIPS and (7252/7445) ARM
- - Intel CE (4100/4200)
- - nVidia Jetson TK1
+ - Raspberry Pi 3B Plus
+
 
 **Note** that other devices may be supported through buildroot. But mileage may vary when it comes down to video playback and graphics performance.
