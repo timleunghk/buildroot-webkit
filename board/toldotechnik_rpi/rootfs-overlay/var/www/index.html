@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>RPi Test</title>
+
+  <link rel="stylesheet" href="css/style.css">
+
+  <script src="vendor/jquery/jquery-3.3.1.min.js"></script>
+  <script src="vendor/socket.io/socket.io.slim.js"></script>
+
+  <script>
+    $(document).ready(function () {
+      // form elements
+      $("input").focus();
+
+      // socket.io
+      var socket = io.connect();
+
+      socket.on("cec", function (data) {
+        console.log("got cec info: " + data);
+        $("#txtCEC").text(data);
+      });
+
+      // audio
+      myAudio = new Audio("vendor/bensound/bensound-buddy.mp3");
+      myAudio.addEventListener("ended", function () {
+        this.currentTime = 0;
+        this.play();
+      }, false);
+      myAudio.play();
+    });
+  </script>
+</head>
+
+<body>
+  <div class="container">
+    <div class="item item-1"></div>
+    <div class="item item-2"></div>
+    <div class="item item-3"></div>
+    <div class="item item-4"></div>
+  </div>
+  <div class="bottom">
+    <div class="title center" id="txtCEC">Press some buttons on your tv remote. (Up, Down, ...)</div>
+    <input type="text" placeholder="Type in something ..." />
+    <div class="center">Index page located in /var/www/</div>
+    <div class="center">Music: https://www.bensound.com</div>
+  </div>
+</body>
+
+</html>
