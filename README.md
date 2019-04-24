@@ -17,15 +17,16 @@ https://github.com/timleunghk/buildroot-webkit.git
 
 1. Ubuntu 16.04
 2. Update to latest components
+
 ```
-sudo apt-get update 
+sudo apt-get update
+```
 
-
-2. Install the following components
+3. Install the following components
 
 ```
 sudo apt-get install -y git subversion bc zip build-essential bison flex gettext libncurses5-dev texinfo autoconf automake libtool libpng12-dev libglib2.0-dev libgtk2.0-dev gperf libxt-dev ccache mtools
-
+```
 
 ### Configuration
 
